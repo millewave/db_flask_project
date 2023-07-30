@@ -4,7 +4,7 @@ README for song_store package.
 # Environment
 This project requires Flask 2.3.x. Use ```flask --version``` to check. If you need to upgrade flask, run ```pip install --upgrade Flask```.
 
-If you find you do need to upgrade Flask, chances are you will also need to upgrade the watchdog package, in whichcase, run ```pip install --upgrade watchdog```.
+If you find you do need to upgrade Flask, chances are you will also need to upgrade the watchdog package, in which case, run ```pip install --upgrade watchdog```.
 
 # Database
 Please see [schema.sql](./song_store/schema.sql) for database schema.
