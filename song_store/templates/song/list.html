@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Songs{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Artist</th>
+          <th>Album</th>
+          <th>Energy</th>
+          <th>Duration</th>
+          <th>Release Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for song in songs %}
+        <tr>
+          <td>
+          {% if g.user %}
+            <a class="action" href="{{ url_for('song.review', song_id=song['song_id']) }}">{{ song['song_name'] }}</a>
+          {% else %}
+            {{ song['song_name'] }}
+          {% endif %}
+          </td>
+          <td>{{ song['artist_name'] }}</td>
+          <td>{{ song['album_name'] }}</td>
+          <td>{{ song['energy'] }}</td>
+          <td>{{ song['duration'] }}</td>
+          <td>{{ song['release_date']}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <div>
+  <em>{{ remaining_num['num'] }} songs skipped ...</em>
+  </div>
+{% endblock %}
