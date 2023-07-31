@@ -9,7 +9,7 @@ If you find you do need to upgrade Flask, chances are you will also need to upgr
 # Database
 Please see [schema.sql](./song_store/schema.sql) for database schema.
 
-We have prepopulated more than one millons Spotify songs as well as hundreds of thousands of albums and artists. If you would like to utilize the data, please contact the authors to download the song_store.sqlite.
+We have prepopulated more than one millons Spotify songs as well as hundreds of thousands of albums and artists. If you would like to utilize the data, please contact the authors to download the song_store.sqlite into [instance](./instance/).
 
 # Main UX Pages
 Flask app run by default hosts the webpage at http://127.0.0.1:5000. Please navigate to it and enjoy.
