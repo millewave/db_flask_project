@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}You Have No Liked Songs{% endblock %}</h1>
+{% endblock %}
+{% block content %}
+<style>
+  .center {
+      text-align: center;
+  }
+
+</style>
+  <div class="center">
+    <a href="{{ url_for('song.list_songs') }}" class="btn btn-primary">Go back to Home</a>
+  </div>
+{% endblock %}
+

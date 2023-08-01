@@ -38,5 +38,17 @@ def create_app(test_config=None):
     from . import song
     app.register_blueprint(song.bp)
     app.add_url_rule('/', endpoint='list_songs')
+
+    from . import recommender
+    app.register_blueprint(recommender.bp)
+    app.add_url_rule('/', endpoint='recommender')
+    app.add_url_rule('/', endpoint='recommendation')
+    app.add_url_rule('/', endpoint='addToLikes')
+
+    from . import liked_playlist
+    app.register_blueprint(liked_playlist.bp)
+
+
+
     
     return app

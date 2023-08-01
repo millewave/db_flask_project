@@ -1,7 +1,7 @@
-html { font-family: sans-serif; background: #eee; padding: 1rem; }
+html { font-family: sans-serif; background: #EDF1FF; padding: 1rem; }
 body { max-width: 960px; margin: 0 auto; background: white; }
-h1 { font-family: serif; color: #377ba8; margin: 1rem 0; }
-a { color: #377ba8; }
+h1 { font-family: serif; color: #007bff;  ; margin: 1rem 0; }
+a { color: #007bff; }
 hr { border: none; border-top: 1px solid lightgray; }
 nav { background: lightgray; display: flex; align-items: center; padding: 0 0.5rem; }
 nav h1 { flex: auto; margin: 0; }
@@ -25,6 +25,39 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 input.danger { color: #cc2f2e; }
 input[type=submit] { align-self: start; min-width: 10em; }
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid #282D3C;
   border-collapse: collapse;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+}
+
+/* Styles for .btn-primary when hovering over it */
+.btn-primary:hover {
+color: #fff;
+background-color: #0056b3; /* Darker shade of the primary color */
+}
+
+/* Styles for .btn-secondary when hovering over it */
+.btn-secondary:hover {
+color: #fff;
+background-color: #4d545a; /* Darker shade of the secondary color */
 }

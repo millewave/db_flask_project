@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block header %}
+{% if added %}
+    <h1>Added to Liked Playlist</h1>
+{% else %}
+    <h1>Deleted from Liked Playlist</h1>
+{% endif %}
+
+
+
+{% endblock %}
+
+{% block content %}
+<style>
+  .center {
+      text-align: center;
+  }
+
+</style>
+  <div class="center">
+    <a href="{{ url_for('song.list_songs') }}" class="btn btn-primary">Go back to Home</a>
+    <a href="{{ url_for('likedPlaylist.likedPlaylist') }}" class="btn btn-secondary">Go to Liked Playlist</a>
+  </div>
+
+{% endblock %}

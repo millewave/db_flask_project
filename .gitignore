@@ -1,5 +1,7 @@
 .venv/
 
+flask/
+
 *.pyc
 __pycache__/
 
