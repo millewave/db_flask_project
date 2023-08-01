@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Songs{% endblock %}</h1>
+  <div style="display: inline-flex; align-items: center; justify-content: space-between; width: 10000px;">
+    <h1>Songs</h1>
+    <a href="{{ url_for('recommender.recommender') }}" class="btn btn-primary">Song Recommender</a>
+  </div>
 {% endblock %}
+
 
 {% block content %}
   <div>

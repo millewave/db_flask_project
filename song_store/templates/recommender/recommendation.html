@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Recommended Songs{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <div>
+    <table>
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Energy</th>
+            <th>Duration</th>
+            <th>Release Date</th>
+            <th>Like</th> <!-- Add the new column header for the heart icon button -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in songs %}
+        <tr>
+            <td>{{ song['song_name'] }}</td>
+            <td>{{ song['artist_name'] }}</td>
+            <td>{{ song['album_name'] }}</td>
+            <td>{{ song['energy'] }}</td>
+            <td>{{ song['duration'] }}</td>
+            <td>{{ song['release_date'] }}</td>
+            <td>
+                <!-- Add the heart icon button inside a form -->
+                <form action="{{ url_for('recommender.addToLikes') }}" method="post">
+                    <input type="hidden" name="song_id" value="{{ song['song_id'] }}">
+                    <input type="hidden" name="song_name" value="{{ song['song_name'] }}">
+                    <input type="hidden" name="artist_name" value="{{ song['artist_name'] }}">
+                    <input type="hidden" name="album_name" value="{{ song['album_name'] }}">
+
+                    <button type="submit" class="heart-btn">
+                    </button>
+                </form>
+            </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <br>
+{% endblock %}
