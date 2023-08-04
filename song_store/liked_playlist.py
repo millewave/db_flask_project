@@ -22,6 +22,7 @@ def likedPlaylist():
         s.song_id = s2a.song_id AND
         art.artist_id = s2a.artist_id AND
         u.user_name = ? AND
+        l.user_name = u.user_name AND
         l.song_id = s.song_id
 
 

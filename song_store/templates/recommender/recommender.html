@@ -5,8 +5,8 @@
   <style>
     /* Style the container to display the radio buttons and checkbox in one column */
     .form-container {
-      display: flex;
-      flex-direction: column;
+      display: inline;
+      flex-direction: row;
     }
 
     .form-container label, .form-container input[type="radio"], .form-container input[type="checkbox"], .form-container input[type="text"] {
@@ -73,14 +73,8 @@
 
   <!-- Textboxes for all records -->
   <div class="form-container">
-    <label for="bpm">BPM:</label>
-    <input type="text" id="bpm" name="bpm"><br>
-
-    <label for="duration">Duration:</label>
-    <input type="text" id="duration" name="duration"><br>
-
-    <label for="release_year">Release Year:</label>
-    <input type="text" id="release_year" name="release_year"><br>
+    <label for="numSongsRequested"><h3>How many songs do you want? (max 50):</h3></label>
+    <input type="text" id="numSongsRequested" name="numSongsRequested"><br>
   </div>
   
   <div class="submit-button-container"> <!-- Center the submit button -->
