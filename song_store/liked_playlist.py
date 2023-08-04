@@ -17,17 +17,20 @@ def likedPlaylist():
 
     LIST_SONG_SQL = f"""
     SELECT s.song_id, s.song_name, s.energy, s.duration, s.release_date, alb.album_name, art.artist_name
-    FROM Songs s, Albums alb, Artists art, Songs_to_artists s2a, Likes l, Users u
+    FROM Songs s, Albums alb, Artists art, Songs_to_artists s2a
     WHERE s.album_id = alb.album_id AND
         s.song_id = s2a.song_id AND
         art.artist_id = s2a.artist_id AND
-        u.user_name = ? AND
-        l.user_name = u.user_name AND
-        l.song_id = s.song_id
+        s.song_id IN(
+            SELECT l.song_id
+            FROM Likes l, Users u
+            WHERE l.user_name = u.user_name AND
+                u.user_name = ?
+        )
 
 
 
-    LIMIT 40
+    LIMIT 50
     """
     db = get_db() 
     try:
