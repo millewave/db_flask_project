@@ -24,10 +24,10 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 .content textarea { min-height: 12em; resize: vertical; }
 input.danger { color: #cc2f2e; }
 input[type=submit] { align-self: start; min-width: 10em; }
-table, th, td {
+/* table, th, td {
   border: 1px solid #282D3C;
   border-collapse: collapse;
-}
+} */
 .btn {
   display: inline-block;
   padding: 10px 20px;
@@ -60,4 +60,42 @@ background-color: #0056b3; /* Darker shade of the primary color */
 .btn-secondary:hover {
 color: #fff;
 background-color: #4d545a; /* Darker shade of the secondary color */
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.heart-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.remove-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Set button width */
+  height: 100%; /* Set button height */
+  padding: 0; /* Remove padding */
+}
+
+.remove-btn svg {
+  fill: lightgreen; /* Change the fill color to green */
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
 }

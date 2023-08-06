@@ -9,6 +9,24 @@ from song_store.db import get_db
 
 bp = Blueprint('recommender', __name__)
 
+RECOMMENDED_SONGS = f"""
+    SELECT *
+    FROM Songs s, Albums alb, Artists art, Songs_to_artists s2a
+    WHERE s.album_id = alb.album_id AND
+        s.song_id = s2a.song_id AND
+        art.artist_id = s2a.artist_id AND
+        s.explicit = ? AND
+        s.song_id NOT IN (
+            SELECT l.song_id
+            FROM Likes l, Users u
+            WHERE u.user_name = ? AND
+                l.user_name = u.user_name
+        )
+    ORDER BY score DESC
+    LIMIT ?
+
+    """
+
 @bp.route('/recommender', methods=('GET', 'POST'))
 def recommender():
     options = {
@@ -71,35 +89,13 @@ def recommendation():
     db = get_db()
     scalars = createScalars(eval(selected_values))
     #TODO CHANGE SQL AND MAKE SURE ALREADY LIKED VALUES FOR THE USER DO NOT SHOW UP
-    db.execute("ALTER TABLE Songs DROP COLUMN score")
     ALTER_SONGS = f"""
-               ALTER TABLE Songs 
-               ADD score REAL AS ('{scalars[0]}'*danceability + '{scalars[1]}'*energy + '{scalars[2]}'*acousticness + '{scalars[3]}'*liveness + '{scalars[4]}'*valence + '{scalars[5]}'*tempo + '{scalars[6]}'*duration)"""
+               UPDATE Songs
+               SET score = ('{scalars[0]}'*danceability + '{scalars[1]}'*energy + '{scalars[2]}'*acousticness + '{scalars[3]}'*liveness + '{scalars[4]}'*valence + '{scalars[5]}'*tempo + '{scalars[6]}'*duration)"""
     db.execute(ALTER_SONGS)
-    RECOMMENDED_SONGS = f"""
-    SELECT s.song_id, s.song_name, s.energy, s.duration, s.release_date, s.score, alb.album_name, art.artist_name
-    FROM Songs s, Albums alb, Artists art, Songs_to_artists s2a
-    WHERE s.album_id = alb.album_id AND
-        s.song_id = s2a.song_id AND
-        art.artist_id = s2a.artist_id AND
-        s.explicit = '{explicitString}' AND
-        s.song_id NOT IN (
-            SELECT l.song_id
-            FROM Likes l, Users u
-            WHERE u.user_name = ? AND
-                l.user_name = u.user_name
-        )
-    ORDER BY score DESC
-    LIMIT '{numSongs}'
-
-    """
-    songs = db.execute(RECOMMENDED_SONGS, [user_name]).fetchall()
     
-
-
-    #Add to likes
-
-
+    songs = db.execute(RECOMMENDED_SONGS, [explicitString, user_name, numSongs]).fetchall()
+    
 
     # Your result page rendering code here
     return render_template('recommender/recommendation.html', songs=songs)

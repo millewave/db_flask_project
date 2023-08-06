@@ -23,7 +23,7 @@
             <th>Artist</th>
             <th>Album</th>
             <th>Energy</th>
-            <th>Duration</th>
+            <th>Danceability</th>
             <th>Release Date</th>
             <th>Remove</th> <!-- Add the new column header for the heart icon button -->
         </tr>
@@ -31,11 +31,17 @@
     <tbody>
         {% for song in songs %}
         <tr>
-            <td>{{ song['song_name'] }}</td>
+            <td>
+            {% if g.user %}
+              <a class="action" href="{{ url_for('song.review', song_id=song['song_id']) }}">{{ song['song_name'] }}</a>
+            {% else %}
+              {{ song['song_name'] }}
+            {% endif %}
+            </td>
             <td>{{ song['artist_name'] }}</td>
             <td>{{ song['album_name'] }}</td>
-            <td>{{ song['energy'] }}</td>
-            <td>{{ song['duration'] }}</td>
+            <td>{{ "%.2f" % (song['energy'] * 100) }}%</td>
+            <td>{{"%.2f" % (song['danceability'] * 100) }}%</td>
             <td>{{ song['release_date'] }}</td>
             <td>
                 <!-- Add the heart icon button inside a form -->
@@ -45,7 +51,11 @@
                     <input type="hidden" name="artist_name" value="{{ song['artist_name'] }}">
                     <input type="hidden" name="album_name" value="{{ song['album_name'] }}">
 
-                    <button type="submit" class="heart-btn"></button>
+                    <button type="submit" class="remove-btn">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="green" stroke="lightgreen" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                          <path d="M18 6L6 18M6 6l12 12"></path>
+                      </svg>
+                  </button>
                 </form>
             </td>
         </tr>

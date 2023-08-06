@@ -17,7 +17,7 @@
           <th>Artist</th>
           <th>Album</th>
           <th>Energy</th>
-          <th>Duration</th>
+          <th>Danceability</th>
           <th>Release Date</th>
         </tr>
       </thead>
@@ -33,8 +33,8 @@
           </td>
           <td>{{ song['artist_name'] }}</td>
           <td>{{ song['album_name'] }}</td>
-          <td>{{ song['energy'] }}</td>
-          <td>{{ song['duration'] }}</td>
+          <td>{{ "%.2f" % (song['energy'] * 100) }}%</td>
+          <td>{{"%.2f" % (song['danceability'] * 100) }}%</td>
           <td>{{ song['release_date']}}</td>
         </tr>
       {% endfor %}

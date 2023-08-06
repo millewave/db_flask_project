@@ -10,7 +10,7 @@ from song_store.db import get_db
 bp = Blueprint('song', __name__)
 
 LIST_SONG_SQL = """
-SELECT s.song_id, s.song_name, s.energy, s.duration, s.release_date, alb.album_name, art.artist_name
+SELECT *
 FROM Songs s, Albums alb, Artists art, Songs_to_artists s2a
 WHERE s.album_id = alb.album_id AND
       s.song_id = s2a.song_id AND
