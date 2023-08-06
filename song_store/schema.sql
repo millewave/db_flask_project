@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS "Songs" (
 	"tempo"	REAL,
 	"duration"	INTEGER,
 	"release_date"	TEXT,
+	"score" REAL,
 	PRIMARY KEY("song_id")
 );
 

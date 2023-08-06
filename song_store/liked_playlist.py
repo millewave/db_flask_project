@@ -9,25 +9,33 @@ from song_store.db import get_db
 
 bp = Blueprint('likedPlaylist', __name__)
 
+LIST_SONG_SQL = f"""
+    SELECT *
+    FROM Songs s, Albums alb, Artists art, Songs_to_artists s2a
+    WHERE s.album_id = alb.album_id AND
+        s.song_id = s2a.song_id AND
+        art.artist_id = s2a.artist_id AND
+        s.song_id IN(
+            SELECT l.song_id
+            FROM Likes l, Users u
+            WHERE l.user_name = u.user_name AND
+                u.user_name = ?
+        )
+
+
+
+    LIMIT 50
+    """
+
+DELETE_FROM_PLAYLIST = f"""DELETE FROM Likes WHERE user_name = ? AND song_id = ?"""
 
 
 @bp.route('/liked_playlist', methods=('GET', 'POST'))
 def likedPlaylist():
     user_name = g.user['user_name']
 
-    LIST_SONG_SQL = f"""
-    SELECT s.song_id, s.song_name, s.energy, s.duration, s.release_date, alb.album_name, art.artist_name
-    FROM Songs s, Albums alb, Artists art, Songs_to_artists s2a, Likes l, Users u
-    WHERE s.album_id = alb.album_id AND
-        s.song_id = s2a.song_id AND
-        art.artist_id = s2a.artist_id AND
-        u.user_name = ? AND
-        l.song_id = s.song_id
 
 
-
-    LIMIT 40
-    """
     db = get_db() 
     try:
         songs = db.execute(LIST_SONG_SQL, [user_name]).fetchall()
@@ -41,7 +49,6 @@ def deleteFromLikes():
     db = get_db()
     if request.method == 'POST':
         print(request.form['song_id'])
-        DELETE_FROM_PLAYLIST = f"""DELETE FROM Likes WHERE user_name = ? AND song_id = ?"""
 
         db.execute(DELETE_FROM_PLAYLIST, (g.user['user_name'], request.form['song_id']))
         db.commit()

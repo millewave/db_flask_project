@@ -13,7 +13,7 @@
             <th>Artist</th>
             <th>Album</th>
             <th>Energy</th>
-            <th>Duration</th>
+            <th>Danceability</th>
             <th>Release Date</th>
             <th>Like</th> <!-- Add the new column header for the heart icon button -->
         </tr>
@@ -24,19 +24,20 @@
             <td>{{ song['song_name'] }}</td>
             <td>{{ song['artist_name'] }}</td>
             <td>{{ song['album_name'] }}</td>
-            <td>{{ song['energy'] }}</td>
-            <td>{{ song['duration'] }}</td>
+            <td>{{ "%.2f" % (song['energy'] * 100) }}%</td>
+            <td>{{"%.2f" % (song['danceability'] * 100) }}%</td>
             <td>{{ song['release_date'] }}</td>
             <td>
-                <!-- Add the heart icon button inside a form -->
                 <form action="{{ url_for('recommender.addToLikes') }}" method="post">
                     <input type="hidden" name="song_id" value="{{ song['song_id'] }}">
                     <input type="hidden" name="song_name" value="{{ song['song_name'] }}">
                     <input type="hidden" name="artist_name" value="{{ song['artist_name'] }}">
                     <input type="hidden" name="album_name" value="{{ song['album_name'] }}">
-
                     <button type="submit" class="heart-btn">
-                    </button>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="red" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                          <path d="M6 3.4C3.59 3.4 2 5 2 7.39c0 1.44.56 2.84 1.55 3.87L12 20l6.45-8.74A5.42 5.42 0 0 0 22 7.39C22 5 20.41 3.4 18 3.4c-1.74 0-3.31.81-4.36 2.09L12 7.81l-1.64-2.32A4.99 4.99 0 0 0 6 3.4z"></path>
+                      </svg>
+                  </button>
                 </form>
             </td>
         </tr>

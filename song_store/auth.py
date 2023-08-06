@@ -8,7 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from song_store.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
-
+ADD_USER = "INSERT INTO Users (user_name, age, password) VALUES (?, ?, ?)"
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
@@ -34,7 +34,7 @@ def register():
         if error is None:
             try:
                 db.execute(
-                    "INSERT INTO Users (user_name, age, password) VALUES (?, ?, ?)",
+                    ADD_USER,
                     (user_name, age, generate_password_hash(password)),
                 )
                 db.commit()
