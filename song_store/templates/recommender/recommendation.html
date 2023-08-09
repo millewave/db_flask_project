@@ -21,7 +21,13 @@
     <tbody>
         {% for song in songs %}
         <tr>
-            <td>{{ song['song_name'] }}</td>
+            <td>
+            {% if g.user %}
+              <a class="action" href="{{ url_for('song.review', song_id=song['song_id']) }}" id=reviewLink>{{ song['song_name'] }}</a>
+            {% else %}
+              {{ song['song_name'] }}
+            {% endif %}
+            </td>
             <td>{{ song['artist_name'] }}</td>
             <td>{{ song['album_name'] }}</td>
             <td>{{ "%.2f" % (song['energy'] * 100) }}%</td>

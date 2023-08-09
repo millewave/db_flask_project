@@ -23,7 +23,7 @@
   <h3>Review Song</h3>
   <form method="post">
     <label for="rating">Rating (1-5)</label>
-    <input name="rating" id="rating" value="{{ request.form['rating'] }}" required>
+    <input type="number" min = 1 max = 5 name="rating" id="rating" value="{{ request.form['rating'] }}" required>
     <label for="comment">Comment</label>
     <textarea name="comment" id="comment">{{ request.form['comment'] }}</textarea>
     <input type="submit" value="Save">

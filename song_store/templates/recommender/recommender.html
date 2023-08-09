@@ -47,8 +47,13 @@
     .submit-btn:hover {
         background-color: #45a049;
     }
-      
-
+      .submit-button-container {
+        text-align: center;
+      }
+      .unclickable {
+        opacity: 0.5;
+        pointer-events: none;
+      }      
   </style>
 {% endblock %}
 
@@ -74,12 +79,27 @@
   <!-- Textboxes for all records -->
   <div class="form-container">
     <label for="numSongsRequested"><h3>How many songs do you want? (max 50):</h3></label>
-    <input type="text" id="numSongsRequested" name="numSongsRequested"><br>
+    <input type="number" min = 0 max = 50 type="text" id="numSongsRequested" name="numSongsRequested"><br>
   </div>
   
   <div class="submit-button-container"> <!-- Center the submit button -->
     <input type="submit" value="Submit" class="submit-btn">
   </div>
+
+  <script>
+    // Get the container and submit button elements
+    const container = document.getElementById('container');
+    const submitButton = document.getElementById('submitBtn');
+
+    // Add a click event listener to the submit button
+    submitButton.addEventListener('click', function() {
+      // Disable the button
+      submitButton.disabled = true;
+
+      // Add a class to the container to style it as "unclickable"
+      container.classList.add('unclickable');
+    });
+  </script>
 
 </form>
 

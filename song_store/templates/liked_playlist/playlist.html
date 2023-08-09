@@ -33,7 +33,7 @@
         <tr>
             <td>
             {% if g.user %}
-              <a class="action" href="{{ url_for('song.review', song_id=song['song_id']) }}">{{ song['song_name'] }}</a>
+              <a class="action" href="{{ url_for('song.review', song_id=song['song_id']) }}" id=reviewLink>{{ song['song_name'] }}</a>
             {% else %}
               {{ song['song_name'] }}
             {% endif %}

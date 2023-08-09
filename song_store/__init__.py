@@ -48,6 +48,11 @@ def create_app(test_config=None):
     from . import liked_playlist
     app.register_blueprint(liked_playlist.bp)
 
+    from . import most_popular
+    app.register_blueprint(most_popular.bp)
+    app.add_url_rule('/', endpoint="mostPopular")
+
+
 
 
     

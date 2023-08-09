@@ -3,7 +3,10 @@
 {% block header %}
   <div style="display: inline-flex; align-items: center; justify-content: space-between; width: 10000px;">
     <h1>Songs</h1>
+    <a href="{{ url_for('mostPopular.mostPopular') }}" class="btn btn-primary">Most Popular Songs</a>
+    {% if g.user %}
     <a href="{{ url_for('recommender.recommender') }}" class="btn btn-primary">Song Recommender</a>
+    {% endif %}
   </div>
 {% endblock %}
 
@@ -26,7 +29,7 @@
         <tr>
           <td>
           {% if g.user %}
-            <a class="action" href="{{ url_for('song.review', song_id=song['song_id']) }}">{{ song['song_name'] }}</a>
+            <a class="action" href="{{ url_for('song.review', song_id=song['song_id']) }}" id=reviewLink>{{ song['song_name'] }}</a>
           {% else %}
             {{ song['song_name'] }}
           {% endif %}
