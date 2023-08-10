@@ -35,7 +35,15 @@
             <td>{{ song['album_name'] }}</td>
             <td>{{ "%.2f" % (song['energy'] * 100) }}%</td>
             <td>{{"%.2f" % (song['danceability'] * 100) }}%</td>
-            <td class="match-cell">{{ "%.2f" % ((song['score'] / first_score) * 100 - 0.01) }}%</td> <!-- Calculate and display relative match % -->
+            <td class="match-cell">
+              {% if song['score'] == 0 %}
+              50.00
+              {% else %}  
+              {{ "%.2f" % ((song['score'] / first_score) * 100 - 0.01) }}
+              {% endif %}
+              %
+            
+            </td> <!-- Calculate and display relative match % -->
             <td>
                 <form action="{{ url_for('recommender.addToLikes') }}" method="post">
                     <input type="hidden" name="song_id" value="{{ song['song_id'] }}">
