@@ -14,11 +14,14 @@
             <th>Album</th>
             <th>Energy</th>
             <th>Danceability</th>
-            <th>Release Date</th>
+            <th class="match-header">Match %</th>
             <th>Like</th> <!-- Add the new column header for the heart icon button -->
         </tr>
     </thead>
     <tbody>
+        {% if songs %}
+        {% set first_score = songs[0]['score'] %} <!-- Get the score of the first song -->
+        {% endif %}
         {% for song in songs %}
         <tr>
             <td>
@@ -32,7 +35,7 @@
             <td>{{ song['album_name'] }}</td>
             <td>{{ "%.2f" % (song['energy'] * 100) }}%</td>
             <td>{{"%.2f" % (song['danceability'] * 100) }}%</td>
-            <td>{{ song['release_date'] }}</td>
+            <td class="match-cell">{{ "%.2f" % ((song['score'] / first_score) * 100 - 0.01) }}%</td> <!-- Calculate and display relative match % -->
             <td>
                 <form action="{{ url_for('recommender.addToLikes') }}" method="post">
                     <input type="hidden" name="song_id" value="{{ song['song_id'] }}">

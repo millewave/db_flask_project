@@ -15,6 +15,7 @@ FROM Songs s, Albums alb, Artists art, Songs_to_artists s2a
 WHERE s.album_id = alb.album_id AND
       s.song_id = s2a.song_id AND
       art.artist_id = s2a.artist_id
+ORDER BY score DESC
 LIMIT 40
 """
 

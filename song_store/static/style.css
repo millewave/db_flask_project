@@ -116,3 +116,6 @@ th {
   background-color: transparent;
   text-decoration: underline;
 }
+.match-header {
+  white-space: nowrap; /* Prevent line breaks within the header cell */
+}
