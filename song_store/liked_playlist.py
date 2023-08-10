@@ -21,9 +21,6 @@ LIST_SONG_SQL = f"""
             WHERE l.user_name = u.user_name AND
                 u.user_name = ?
         )
-
-
-
     LIMIT 50
     """
 
@@ -35,14 +32,15 @@ def likedPlaylist():
     user_name = g.user['user_name']
 
 
+    if request.method == 'GET':
+        db = get_db() 
+        try:
+            songs = db.execute(LIST_SONG_SQL, [user_name]).fetchall()
+        except Exception as error:
+            print(error)
+            return render_template('liked_playlist/noliked.html')
+        return render_template('liked_playlist/playlist.html', songs=songs)
 
-    db = get_db() 
-    try:
-        songs = db.execute(LIST_SONG_SQL, [user_name]).fetchall()
-    except Exception as error:
-        print(error)
-        return render_template('liked_playlist/noliked.html')
-    return render_template('liked_playlist/playlist.html', songs=songs)
 
 @bp.route('/deleteFromLikes', methods=(['POST']))
 def deleteFromLikes():

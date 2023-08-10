@@ -76,6 +76,9 @@ th {
   background-color: #f2f2f2;
 }
 
+#main {
+  text-decoration: underline;
+}
 .heart-btn {
   border: none;
   background: none;
@@ -98,4 +101,21 @@ th {
   width: 24px;
   height: 24px;
   vertical-align: middle;
+}
+
+#reviewLink:link {
+  color: lightseagreen;
+}
+#reviewLink:visited {
+  color: lightseagreen;
+}
+
+#reviewLink:hover {
+  color: seagreen;
+  background-color: transparent;
+  text-decoration: underline;
+}
+.match-header {
+  white-space: nowrap; /* Prevent line breaks within the header cell */
+
 }

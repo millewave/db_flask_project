@@ -88,7 +88,6 @@ def recommendation():
     #Render table
     db = get_db()
     scalars = createScalars(eval(selected_values))
-    #TODO CHANGE SQL AND MAKE SURE ALREADY LIKED VALUES FOR THE USER DO NOT SHOW UP
     ALTER_SONGS = f"""
                UPDATE Songs
                SET score = ('{scalars[0]}'*danceability + '{scalars[1]}'*energy + '{scalars[2]}'*acousticness + '{scalars[3]}'*liveness + '{scalars[4]}'*valence + '{scalars[5]}'*tempo + '{scalars[6]}'*duration)"""

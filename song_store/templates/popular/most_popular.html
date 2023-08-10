@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Most Popular{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+{% if songs|length == 0 %}
+    <p>No songs have been added to a liked playlist to calculate the most popular songs.</p>
+    <style>
+        .center {
+            text-align: center;
+        }  
+    </style>
+    <div class="center">
+        <a href="{{ url_for('song.list_songs') }}" class="btn btn-primary">Go back to Home</a>
+    </div>
+{% else %}
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Artist</th>
+          <th>Album</th>
+          <th>Energy</th>
+          <th>Danceability</th>
+          <th>Release Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+            {% for song in songs %}
+            <tr>
+            <td>
+            {% if g.user %}
+                <a class="action" href="{{ url_for('song.review', song_id=song['song_id']) }}" id = reviewLink>{{ song['song_name'] }}</a>
+            {% else %}
+                {{ song['song_name'] }}
+            {% endif %}
+            </td>
+            <td>{{ song['artist_name'] }}</td>
+            <td>{{ song['album_name'] }}</td>
+            <td>{{ "%.2f" % (song['energy'] * 100) }}%</td>
+            <td>{{"%.2f" % (song['danceability'] * 100) }}%</td>
+            <td>{{ song['release_date']}}</td>
+            </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+{% endif %}
+{% endblock %}
