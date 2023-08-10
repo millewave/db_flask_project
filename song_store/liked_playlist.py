@@ -41,6 +41,7 @@ def likedPlaylist():
             return render_template('liked_playlist/noliked.html')
         return render_template('liked_playlist/playlist.html', songs=songs)
 
+
 @bp.route('/deleteFromLikes', methods=(['POST']))
 def deleteFromLikes():
     db = get_db()

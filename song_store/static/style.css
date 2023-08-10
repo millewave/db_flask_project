@@ -79,7 +79,6 @@ th {
 #main {
   text-decoration: underline;
 }
-
 .heart-btn {
   border: none;
   background: none;
@@ -118,4 +117,5 @@ th {
 }
 .match-header {
   white-space: nowrap; /* Prevent line breaks within the header cell */
+
 }
