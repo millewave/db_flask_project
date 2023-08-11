@@ -17,15 +17,9 @@ Flask app run by default hosts the webpage at http://127.0.0.1:5000. Please navi
 # Notes
 Quick notes on operational steps
 
-Recreate Song database.
-```
-flask --app song_store init-db
-```
-Caution: this command will drop all existing tables. If you don't want to lose all data, please do NOT run it.
-
 Run the application.
 ```
-flask --app song_store run --debug
+flask --app song_store run
 ```
 
 # References
