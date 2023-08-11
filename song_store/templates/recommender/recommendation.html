@@ -40,8 +40,13 @@
               {% if song['score'] == 0 %}
               50.00
               {% else %}  
-              {{ "%.2f" % ((song['score'] / first_score) * 100 - 0.01) }}
+                {% if song['score'] > 0 %}
+                  {{ "%.2f" % ((song['score'] / first_score) * 100 - 0.01) }}
+                {% else %}  
+                  {{ "%.2f" % ((first_score/ song['score']) * 100 - 0.01) }}
+                {% endif %}
               {% endif %}
+
               %
             
             </td> <!-- Calculate and display relative match % -->

@@ -94,6 +94,7 @@ def recommendation():
     db.execute(ALTER_SONGS)
     
     songs = db.execute(RECOMMENDED_SONGS, [explicitString, user_name, numSongs]).fetchall()
+
     
 
     # Your result page rendering code here
