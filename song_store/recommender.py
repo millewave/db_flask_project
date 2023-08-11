@@ -7,6 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from song_store.db import get_db
 
+numTried = 0
 bp = Blueprint('recommender', __name__)
 
 RECOMMENDED_SONGS = f"""
@@ -62,10 +63,9 @@ def recommender():
 
     return render_template('recommender/recommender.html', options=options, adult=adult, selected_values=selected_values, numSongsRequested = numSongsRequested)
 
-
-
 @bp.route('/recommendation')
 def recommendation():
+    global numTried
     # Retrieve the data from query parameters
     user_name = g.user['user_name']
     numSongsRequested = request.args.get('numSongsRequested')
@@ -76,6 +76,7 @@ def recommendation():
     else:
         explicitString = "False"
     numSongs = 0
+    numTried += 1
     try:
         numSongs = int(numSongsRequested)
         if numSongs>50:
@@ -91,14 +92,16 @@ def recommendation():
     ALTER_SONGS = f"""
                UPDATE Songs
                SET score = ('{scalars[0]}'*danceability + '{scalars[1]}'*energy + '{scalars[2]}'*acousticness + '{scalars[3]}'*liveness + '{scalars[4]}'*valence + '{scalars[5]}'*tempo + '{scalars[6]}'*duration)"""
+    db.execute("BEGIN TRANSACTION;")
     db.execute(ALTER_SONGS)
-    
+    if numTried == 1:
+        db.execute("COMMIT;")
+    else:
+        db.execute("ROLLBACK;")
     songs = db.execute(RECOMMENDED_SONGS, [explicitString, user_name, numSongs]).fetchall()
-
-    
-
-    # Your result page rendering code here
+    numTried = 0
     return render_template('recommender/recommendation.html', songs=songs)
+    
 
 
 def createScalars(dict):
